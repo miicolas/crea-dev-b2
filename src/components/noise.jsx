@@ -1,9 +1,9 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 
 export default function Noise({
   patternSize = 250,
-  patternScaleX = 5,
-  patternScaleY = 5,
+  patternScaleX = 2,
+  patternScaleY = 2,
   patternRefreshInterval = 2,
   patternAlpha = 15,
 }) {
@@ -11,13 +11,13 @@ export default function Noise({
 
   useEffect(() => {
     const canvas = grainRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     let frame = 0;
 
-    const patternCanvas = document.createElement('canvas');
+    const patternCanvas = document.createElement("canvas");
     patternCanvas.width = patternSize;
     patternCanvas.height = patternSize;
-    const patternCtx = patternCanvas.getContext('2d');
+    const patternCtx = patternCanvas.getContext("2d");
     const patternData = patternCtx.createImageData(patternSize, patternSize);
     const patternPixelDataLength = patternSize * patternSize * 4;
 
@@ -41,7 +41,7 @@ export default function Noise({
 
     const drawGrain = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = ctx.createPattern(patternCanvas, 'repeat');
+      ctx.fillStyle = ctx.createPattern(patternCanvas, "repeat");
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
 
@@ -54,14 +54,26 @@ export default function Noise({
       window.requestAnimationFrame(loop);
     };
 
-    window.addEventListener('resize', resize);
+    window.addEventListener("resize", resize);
     resize();
     loop();
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
     };
-  }, [patternSize, patternScaleX, patternScaleY, patternRefreshInterval, patternAlpha]);
+  }, [
+    patternSize,
+    patternScaleX,
+    patternScaleY,
+    patternRefreshInterval,
+    patternAlpha,
+  ]);
 
-  return <canvas className="absolute inset-0 w-full h-full pointer-events-none z-30" style={{ mixBlendMode: 'multiply' }} ref={grainRef} />;
+  return (
+    <canvas
+      className="absolute inset-0 w-full h-full pointer-events-none z-30"
+      style={{ mixBlendMode: "multiply" }}
+      ref={grainRef}
+    />
+  );
 }
