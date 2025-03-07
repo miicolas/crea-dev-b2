@@ -5,7 +5,7 @@ export default function Noise({
   patternScaleX = 2,
   patternScaleY = 2,
   patternRefreshInterval = 2,
-  patternAlpha = 15,
+  patternAlpha = 50,
 }) {
   const grainRef = useRef(null);
 

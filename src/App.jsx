@@ -1,4 +1,5 @@
 import Noise from "./components/noise";
+import Angry from "./components/angry";
 import CursorDisk from "./components/CursorDisk";
 
 export default function App() {
@@ -34,8 +35,8 @@ export default function App() {
             </p>
           </div>
         </div>
-        <div className="w-full h-screen bg-blue-500 flex items-center justify-center snap-start">
-          Panel 2
+        <div className="snap-start">
+          <Angry />
         </div>
         <div className="w-full h-screen bg-green-500 flex items-center justify-center snap-start">
           Panel 3
