@@ -1,5 +1,5 @@
 import Noise from "./components/noise";
-
+import Angry from "./components/angry";
 export default function App() {
   return (
     <div
@@ -19,11 +19,11 @@ export default function App() {
       </style>
       <Noise />
       <div className="relative z-20">
-        <div className="w-full h-screen bg-red-500 flex items-center justify-center snap-start">
+        <div className="w-full h-screen bg-green-500 flex items-center justify-center snap-start">
           Panel 1
         </div>
-        <div className="w-full h-screen bg-blue-500 flex items-center justify-center snap-start">
-          Panel 2
+        <div className="snap-start">
+          <Angry />
         </div>
         <div className="w-full h-screen bg-green-500 flex items-center justify-center snap-start">
           Panel 3

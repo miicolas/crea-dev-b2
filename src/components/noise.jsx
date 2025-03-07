@@ -5,7 +5,7 @@ export default function Noise({
   patternScaleX = 5,
   patternScaleY = 5,
   patternRefreshInterval = 2,
-  patternAlpha = 15,
+  patternAlpha = 50,
 }) {
   const grainRef = useRef(null);
 
@@ -63,5 +63,5 @@ export default function Noise({
     };
   }, [patternSize, patternScaleX, patternScaleY, patternRefreshInterval, patternAlpha]);
 
-  return <canvas className="absolute inset-0 w-full h-full pointer-events-none z-30" style={{ mixBlendMode: 'multiply' }} ref={grainRef} />;
+  return <canvas className="fixed inset-0 w-full h-full pointer-events-none z-50" style={{ mixBlendMode: 'overlay', opacity: 0.7 }} ref={grainRef} />;
 }
