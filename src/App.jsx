@@ -100,21 +100,53 @@ export default function App() {
       {hasVisitedLanding && (
         <motion.div 
           className="navigation-dots"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <button 
-            className={`nav-dot ${currentSection === 'landing' ? 'active' : ''}`}
+          <motion.button 
+            className={`nav-dot hover-grow ${currentSection === 'landing' ? 'active' : ''}`}
             onClick={() => navigateToEmotion('landing')}
             aria-label="Aller à la page d'accueil"
+            whileHover={{ 
+              scale: 1.2, 
+              transition: { duration: 0.2 } 
+            }}
+            whileTap={{ 
+              scale: 0.9, 
+              transition: { duration: 0.1 } 
+            }}
+            initial={{ scale: 0.8, opacity: 0.7 }}
+            animate={{ 
+              scale: currentSection === 'landing' ? 1.1 : 1, 
+              opacity: currentSection === 'landing' ? 1 : 0.7,
+              boxShadow: currentSection === 'landing' ? '0 0 8px rgba(255,255,255,0.5)' : 'none'
+            }}
+            transition={{ duration: 0.3 }}
           />
           {emotions.map((emotion, index) => (
-            <button 
+            <motion.button 
               key={emotion.id}
-              className={`nav-dot ${currentSection === emotion.id ? 'active' : ''}`}
+              className={`nav-dot hover-grow ${currentSection === emotion.id ? 'active' : ''}`}
               onClick={() => navigateToEmotion(emotion.id)}
               aria-label={`Aller à la section ${emotion.name}`}
+              whileHover={{ 
+                scale: 1.2, 
+                backgroundColor: emotion.accent,
+                transition: { duration: 0.2 } 
+              }}
+              whileTap={{ 
+                scale: 0.9, 
+                transition: { duration: 0.1 } 
+              }}
+              initial={{ scale: 0.8, opacity: 0.7 }}
+              animate={{ 
+                scale: currentSection === emotion.id ? 1.1 : 1, 
+                opacity: currentSection === emotion.id ? 1 : 0.7,
+                backgroundColor: currentSection === emotion.id ? emotion.accent : '',
+                boxShadow: currentSection === emotion.id ? `0 0 8px ${emotion.accent}` : 'none'
+              }}
+              transition={{ duration: 0.3 }}
             />
           ))}
         </motion.div>

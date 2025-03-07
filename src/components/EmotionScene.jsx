@@ -192,6 +192,60 @@ const EmotionScene = ({ emotion }) => {
         return null;
     }
   };
+  // Render emotion words with staggered animations and distributed positioning
+  const renderEmotionWords = () => {
+    return (
+      <div className="emotion-words" style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        zIndex: 10
+      }}>
+        {currentWords.map((word, index) => {
+          // Calculate positions to distribute words around the screen
+          const positions = [
+            { top: '10%', left: '15%' },
+            { top: '25%', right: '20%' },
+            { bottom: '30%', left: '25%' },
+            { bottom: '15%', right: '15%' },
+            { top: '50%', left: '10%' },
+          ];
+          
+          const position = positions[index % positions.length];
+          
+          return (
+            <motion.span
+              key={`word-${index}`}
+              className={`emotion-word ${emotion.id}-word text-fade-in delay-${index + 1}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.5 + (index * 0.2),
+                ease: "easeOut" 
+              }}
+              style={{
+                position: 'absolute',
+                ...position,
+                fontSize: `${1 + Math.random() * 0.5}rem`,
+                opacity: 0.8 + (Math.random() * 0.2)
+              }}
+              whileHover={{
+                scale: 1.1,
+                opacity: 1,
+                transition: { duration: 0.3 }
+              }}
+            >
+              {word}
+            </motion.span>
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <div className="emotion-scene" style={{ ...currentStyle }}>
@@ -200,46 +254,43 @@ const EmotionScene = ({ emotion }) => {
           images={currentImages}
           currentIndex={imageIndex}
           transitionType={transitionType}
-          duration={1.2}
           emotionId={emotion.id}
         />
+        <ParallaxImages emotionId={emotion.id} />
+        {renderEmotionOverlay()}
       </div>
-
-      <ParallaxImages emotionId={emotion.id} />
-      {renderEmotionOverlay()}
-
-      <div className="emotion-words">
-        {currentWords.map((word, index) => (
-          <motion.span
-            key={word}
-            className={`floating-word ${
-              emotion.id === "desespoir"
-                ? "heartbeat-text"
-                : emotion.id === "acceptation"
-                ? "breathing-text"
-                : "glowing-text"
-            }`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{
-              opacity: [0, 0.7, 0],
-              y: [20, 0, -20],
-            }}
-            transition={{
-              duration: 8,
-              delay: index * 2,
-              repeat: Infinity,
-              repeatDelay: currentWords.length * 2,
-            }}
-            style={{
-              left: `${((index * 20) % 80) + 10}%`,
-              top: `${((index * 15) % 70) + 15}%`,
-              fontSize: `${1 + (index % 3) * 0.5}rem`,
-            }}
-          >
-            {word}
-          </motion.span>
-        ))}
-      </div>
+      
+      <motion.div 
+        className="emotion-content"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.h2 
+          className={`emotion-title ${emotion.id}-title text-shadow-drop`}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          whileHover={{
+            scale: 1.05,
+            filter: "brightness(1.2)",
+            transition: { duration: 0.3 }
+          }}
+        >
+          {emotion.title}
+        </motion.h2>
+        
+        {renderEmotionWords()}
+        
+        <motion.p 
+          className={`emotion-description ${emotion.id}-description`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          {emotion.description}
+        </motion.p>
+      </motion.div>
     </div>
   );
 };

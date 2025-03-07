@@ -72,6 +72,7 @@ const EmotionSection = ({
       transition: {
         staggerChildren: 0.2,
         when: "beforeChildren",
+        delayChildren: 0.3, // Add delay before starting children animations
       },
     },
     exit: {
@@ -95,6 +96,19 @@ const EmotionSection = ({
     },
   };
 
+  // Enhanced item variants with different timings for each child
+  const createStaggeredItemVariant = (index) => ({
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        ease: [0.16, 1, 0.3, 1],
+        duration: 0.8,
+        delay: 0.1 * index, // Staggered delay based on index
+      },
+    },
+  });
   // Animation pour le titre flottant
   const titleY = useTransform(scrollYProgress, [0, 0.5, 1], [0, -30, -60]);
   const titleOpacity = useTransform(
@@ -395,7 +409,17 @@ const EmotionSection = ({
           initial={currentAnimation.textEffect.initial}
           animate={currentAnimation.textEffect.animate}
         >
-          <h2 className="emotion-name">{emotion.name}</h2>
+          <h2
+            className={`emotion-name hover-glow ${
+              emotion.id === "desespoir"
+                ? "text-flicker"
+                : emotion.id === "acceptation"
+                ? "breathing-text"
+                : "text-shadow-drop"
+            }`}
+          >
+            {emotion.name}
+          </h2>
         </motion.div>
 
         {/* Navigation minimale */}
@@ -415,26 +439,60 @@ const EmotionSection = ({
         >
           <motion.button
             onClick={onPrev}
-            className="nav-button prev"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+            className="nav-button prev hover-glow"
+            whileHover={{
+              scale: 1.1,
+              x: -5,
+              filter: "brightness(1.3)",
+              transition: { duration: 0.3, ease: "easeOut" },
+            }}
+            whileTap={{
+              scale: 0.95,
+              transition: { duration: 0.1 },
+            }}
             disabled={currentIndex === 0}
           >
-            ←
+            <span className="nav-arrow">←</span>
           </motion.button>
 
-          <div className="nav-indicator">
-            {currentIndex + 1}/{totalEmotions}
-          </div>
+          <motion.div
+            className="nav-indicator"
+            whileHover={{
+              scale: 1.03,
+              transition: { duration: 0.3 },
+            }}
+          >
+            <p
+              className={`
+              ${
+                emotion.id === "desespoir"
+                  ? "text-focus-in"
+                  : emotion.id === "acceptation"
+                  ? "tracking-in"
+                  : "text-shadow-drop"
+              }
+            `}
+            >
+              {currentIndex + 1}/{totalEmotions}
+            </p>
+          </motion.div>
 
           <motion.button
             onClick={onNext}
-            className="nav-button next"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+            className="nav-button next hover-glow"
+            whileHover={{
+              scale: 1.1,
+              x: 5,
+              filter: "brightness(1.3)",
+              transition: { duration: 0.3, ease: "easeOut" },
+            }}
+            whileTap={{
+              scale: 0.95,
+              transition: { duration: 0.1 },
+            }}
             disabled={currentIndex === totalEmotions - 1}
           >
-            →
+            <span className="nav-arrow">→</span>
           </motion.button>
         </motion.div>
       </div>
