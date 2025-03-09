@@ -1,7 +1,7 @@
 import Noise from "./components/noise";
 import Angry from "./components/angry";
 import CursorDisk from "./components/CursorDisk";
-
+import Happy from "./components/Happy";
 export default function App() {
   return (
     <div
@@ -39,7 +39,7 @@ export default function App() {
           <Angry />
         </div>
         <div className="w-full h-screen bg-green-500 flex items-center justify-center snap-start">
-          Panel 3
+          <Happy />
         </div>
       </div>
     </div>

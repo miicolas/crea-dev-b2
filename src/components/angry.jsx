@@ -68,7 +68,7 @@ const Angry = () => {
   // Style pour l'animation d'explosion de colère
   const angerBurstStyle = {
     position: 'absolute',
-    borderRadius: '50%',
+    borderRadius: '0%',
     background: 'radial-gradient(circle, rgba(255,50,50,0.8) 0%, rgba(255,0,0,0) 70%)',
     transform: 'translate(-50%, -50%)',
     pointerEvents: 'none',
@@ -146,7 +146,7 @@ const Angry = () => {
         className="absolute inset-0 z-0" 
         animate={{
           background: [
-            'radial-gradient(circle, rgba(180,0,0,1) 0%, rgba(70,0,0,1) 100%)',
+            'radial-gradient(, rgba(180,0,0,1) 0%, rgba(70,0,0,1) 100%)',
             'radial-gradient(circle, rgba(220,0,0,1) 0%, rgba(100,0,0,1) 100%)',
             'radial-gradient(circle, rgba(180,0,0,1) 0%, rgba(70,0,0,1) 100%)'
           ]
@@ -180,7 +180,6 @@ const Angry = () => {
       <div className="size-96 bg-red-500 animate-heartbeat-panic absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"></div>
       <div className="absolute inset-0 z-10 h-screen w-screen">{lightnings}</div>
 
-      {/* Texte de colère pulsant */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
         initial={{ opacity: 0 }}
