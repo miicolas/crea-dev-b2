@@ -2,6 +2,7 @@ import Noise from "./components/noise";
 import Angry from "./components/angry";
 import CursorDisk from "./components/CursorDisk";
 import Happy from "./components/Happy";
+import Scared from "./components/Scared";
 export default function App() {
   return (
     <div
@@ -40,6 +41,9 @@ export default function App() {
         </div>
         <div className="w-full h-screen bg-green-500 flex items-center justify-center snap-start">
           <Happy />
+        </div>
+        <div className="w-full h-screen bg-cyan-950 flex items-center justify-center snap-start">
+          <Scared />
         </div>
       </div>
     </div>
