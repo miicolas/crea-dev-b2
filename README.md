@@ -1,12 +1,25 @@
-# React + Vite
+# Creative Development
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+Un projet visant à transmettre des émotions à travers une page web interactive.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clonez le dépôt :
+    ```bash
+    git clone https://github.com/miicolas/crea-dev-b2.git
+    ```
+2. Accédez au dossier du projet :
+    ```bash
+    cd crea-dev-b2
+    ```
+3. Installez les dépendances :
+    ```bash
+    npm install
+    ```
 
-## Expanding the ESLint configuration
+## Contributeurs
+- Eric Hubert
+- Nicolas Becharat
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
